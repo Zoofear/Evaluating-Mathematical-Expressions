@@ -2,10 +2,59 @@
 //
 
 #include <iostream>
+#include <sstream>
+#include <stack>
 
 int main()
 {
-    std::cout << "Hello World!\n";
+        std::string input = "12 3.5 + 7 * 2 -";
+        std::istringstream ss(input);
+        std::string token;
+        std::stack<std::string> postfix;
+        while (std::getline(ss, token, ' ')) {
+            postfix.push(token);
+        }
+        int total = postfix.size();
+        for (int j = 0; j < total; j++)
+        {
+            std::cout << postfix.top();
+            postfix.pop();
+        }
+
+        /*if (token == "+" || token == "-" || token == "/" || token == "*")
+             {
+                 int weight = 0;
+
+                 if (token == "*" || token == "/")
+
+
+                 if (token ==
+                     )
+                 {
+
+                 }
+
+             }
+             else if (token == "("
+             {
+
+             }
+             else if (token == ")")
+             {
+
+             }
+             else
+             {
+                 postfix.push(token);
+             }*/
+  
+
+
+
+
+
+        return 0;
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
