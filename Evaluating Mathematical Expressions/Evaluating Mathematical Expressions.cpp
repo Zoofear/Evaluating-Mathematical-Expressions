@@ -4,23 +4,25 @@
 #include <iostream>
 #include <sstream>
 #include <stack>
+#include "Infix2Postfix.h"
 
 int main()
 {
-        std::string input = "12 3.5 + 7 * 2 -";
-        std::istringstream ss(input);
-        std::string token;
-        std::stack<std::string> postfix;
-        while (std::getline(ss, token, ' ')) {
-            postfix.push(token);
-        }
-        int total = postfix.size();
-        for (int j = 0; j < total; j++)
-        {
-            std::cout << postfix.top();
-            postfix.pop();
-        }
+    std::string x = "12 + 13 - 17 / 2";
 
+    Infix2Postfix expression(x);
+
+   std::string y = expression.retrieveInput();
+
+   std::cout << y << '\n';
+
+   expression.tokenizer();
+
+   expression.printtempstack();
+
+
+
+        
         /*if (token == "+" || token == "-" || token == "/" || token == "*")
              {
                  int weight = 0;
@@ -37,11 +39,14 @@ int main()
              }
              else if (token == "("
              {
-
+             
              }
              else if (token == ")")
              {
-
+             while(postfix.top() != "(" && (!postfix.empty())
+             {
+             std::string temp = postfix.top();
+             postfix
              }
              else
              {

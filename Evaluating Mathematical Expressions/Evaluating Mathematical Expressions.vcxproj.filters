@@ -18,6 +18,9 @@
     <ClCompile Include="Evaluating Mathematical Expressions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Infix2Postfix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Infix2Postfix.h">
