@@ -14,12 +14,37 @@ public:
 		setInput(input);
 	};
 
-	void tokenizer();		//tokenizes the input to allow it to be evaluated by each element individually and manipulated individually
+	/*void tokenizer();		//tokenizes the input to allow it to be evaluated by each element individually and manipulated individually*/
 
-	int operatorChecker(std::string token);							//checks whether or not the token is an operator or operand 
+	int operatorChecker(std::string token);	//checks whether or not the token is an operator or operand
 
-	void infixConverter();	//takes the temporary stack and adds it to the ouput stack#pragma
+	int magnitudeChecker(std::string x);    // checks the magnitude of the operator to order the operators
 
+	int inputVerifyer(const std::string start);					//verifys the input to make sure it is usable
+
+	void infixConverter();	//takes the temporary stack and adds it to the ouput stack
+
+	void stackClearer()		//clears temporarystack
+
+	{
+		while (!temporarystack.empty())
+		{
+			temporarystack.pop();
+		}
+	}
+
+	int inputSize()
+	{	
+		std::istringstream tss(start);
+		std::string temp;
+		int k = 0;						//Starts at 1 because im counting the iterations, not using it as a cursor
+		while (tss >> temp)
+		{
+			k++;
+		}
+
+		return k;
+	}
 	void setInput(const std::string input)
 	{
 		start = input;
@@ -35,7 +60,7 @@ public:
 		return output;
 	}
 
-	void printtempstack()
+	void printtempstack()	//Test program to make sure the stack is empty 
 	{
 		if (temporarystack.empty())
 		{

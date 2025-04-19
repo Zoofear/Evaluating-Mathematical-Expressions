@@ -8,58 +8,129 @@
 
 int main()
 {
-    std::string x = "12 + 13 - 17 / 2";
+    std::string x = " ( A + B * C ) / ( D - E ) ";
 
     Infix2Postfix expression(x);
 
    std::string y = expression.retrieveInput();
 
-   std::cout << y << '\n';
+   std::cout << x << '\n';
 
-   expression.tokenizer();
+   expression.infixConverter();
 
-   expression.printtempstack();
+   std::cout << expression.returnOutput() << "\n";
 
+   std::cout << '\n';
 
+   x = " ( A + B * ( C - D ) ) / E ";
 
-        
-        /*if (token == "+" || token == "-" || token == "/" || token == "*")
-             {
-                 int weight = 0;
+   Infix2Postfix expression1(x);
 
-                 if (token == "*" || token == "/")
+   std::cout << x << '\n';
 
+   expression1.infixConverter();
 
-                 if (token ==
-                     )
-                 {
+   std::cout << expression1.returnOutput() << "\n";
 
-                 }
+   std::cout << '\n';
 
-             }
-             else if (token == "("
-             {
-             
-             }
-             else if (token == ")")
-             {
-             while(postfix.top() != "(" && (!postfix.empty())
-             {
-             std::string temp = postfix.top();
-             postfix
-             }
-             else
-             {
-                 postfix.push(token);
-             }*/
+   x = " ";
+
+   Infix2Postfix expression2(x);
+
+   std::cout << x << '\n';
+
+   expression2.infixConverter();
+
+   std::cout << expression2.returnOutput() << "\n";
+
+   std::cout << '\n';
+
+   x = "A + B ) * C ";
+
+   Infix2Postfix expression3(x);
+
+   std::cout << x << '\n';
   
+   expression3.infixConverter();
 
+   std::cout << expression3.returnOutput() << "\n";
 
+   std::cout << '\n';
 
+   x = " ( A + B * C ";
 
+   Infix2Postfix expression4(x);
 
-        return 0;
+   std::cout << x << '\n';
+  
+   expression4.infixConverter();
 
+   std::cout << expression4.returnOutput() << "\n";
+
+   std::cout << '\n';
+
+   x = " A + B @ C ";
+
+   Infix2Postfix expression5(x);
+
+   std::cout << x << '\n';
+   
+   expression5.infixConverter();
+
+   std::cout << expression5.returnOutput() << "\n";
+
+   std::cout << '\n';
+
+   x = " A + * B ";
+
+   Infix2Postfix expression6(x);
+
+   std::cout << x << '\n';
+   
+   expression6.infixConverter();
+
+   std::cout << expression6.returnOutput() << "\n";
+
+   std::cout << '\n';
+
+   x = " A B + ";
+
+   Infix2Postfix expression7(x);
+
+   std::cout << x << '\n';
+  
+   expression7.infixConverter();
+
+   std::cout << expression7.returnOutput() << "\n";
+
+   std::cout << '\n';
+
+   x = " A + G ) B * C ( D + E ";
+
+   Infix2Postfix expression8(x);
+
+   std::cout << x << '\n';
+   
+   expression8.infixConverter();
+
+   std::cout << expression8.returnOutput() << "\n";
+
+   std::cout << '\n';
+
+   x = " ( ( ( ( ( ( ( ( ( A + B ) ) ) ) ) ) ) ) ) ";
+
+   Infix2Postfix expression9(x);
+
+   std::cout << x << '\n';
+
+   expression9.infixConverter();
+
+   std::cout << expression9.returnOutput() << "\n";
+
+   std::cout << '\n';
+
+ 
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
