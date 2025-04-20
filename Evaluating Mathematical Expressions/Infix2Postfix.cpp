@@ -83,6 +83,51 @@ int Infix2Postfix::inputVerifyer(const std::string start)			//Evil Spaghetti Cod
 			return 0;												//error output
 
 		}
+		else if (operatorChecker(token) == 0)
+		{
+
+			if (j == 1)																	////This checks to see if the token being evaluated is at the start of the string, if it is then it needs a filler to make sure there isnt a false positive, since blank space gives no value on operatorChecker();
+			{
+				prev = "-";
+			}
+			else
+			{
+				while (temporarystack.size() != (j - 1) && !temporarystack.empty())		//This checks what the previous token in the expression is
+				{
+					prev = temporarystack.top();
+					temporarystack.pop();
+				}
+				stackClearer();															//Cleans up stack to not cause issues
+			}	
+
+			std::istringstream tss(start);											//Fresh stack to evaluate
+			while (tss >> temp)
+			{
+				temporarystack.push(temp);
+			}
+			if (j + 1 == temporarystack.size())										//This checks to see if the token being evaluated is at the end of the string, if it is then it needs a filler to make sure there isnt a false positive, since blank space gives no value on operatorChecker();
+			{
+				next = "-";
+			}
+			else
+			{
+				while (temporarystack.size() != (j + 1) && !temporarystack.empty())	//Iterating through the stack to find the token to be evaulated
+				{
+					next = temporarystack.top();
+					temporarystack.pop();
+				}
+				stackClearer();
+			}
+
+			stackClearer();
+
+			if ((operatorChecker(prev) != 1 || operatorChecker(next) != 1))//Evaluates the tokens to see if it needs to throw an error code
+			{
+				std::cout << next << "Operand Error\n";
+				return 0;
+			}
+
+		}
 		else if (operatorChecker(token) == 1 && token != "(" && token != ")" && !temporarystack.empty())	//This is for evaluating the operands specifically
 		{
 			while (temporarystack.size() != (j - 1) && !temporarystack.empty())		//This checks what the previous token in the expression is

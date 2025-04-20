@@ -94,7 +94,7 @@ int main()
 
    std::cout << '\n';
 
-   x = " A B + ";
+   x = " A B + C ";
 
    Infix2Postfix expression7(x);
 
