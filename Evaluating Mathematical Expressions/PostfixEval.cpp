@@ -36,7 +36,11 @@ int PostfixEval::operatorChooser(char z)	//just gives an int for whatever operat
 void PostfixEval::eval()
 {
 	std::istringstream ss(input);
-
+	if (!ss)
+	{
+		std::cout << "Your input is empty!\n";
+		return;
+	}
 	while (ss >> token)
 	{
 			if (std::isdigit(token[0]) || ((token[0] == '-' || token[0] == '.') && token.length() > 1))				//checks if the token is a number
@@ -102,9 +106,16 @@ void PostfixEval::eval()
 				return;
 			}
 	}
-
-	output = operands.top();
-	if (operands.size() != 1)
+	
+	if (!operands.empty())
+	{
+		output = operands.top();
+	}
+	else if (operands.empty())
+	{
+		std::cout << "There is nothing to evaluate\n";
+	}
+	else if (operands.size() != 1)
 	{
 		std::cout << "There is an error with the output, as there are still operands in the stack\nStack: ";
 		while (!operands.empty())

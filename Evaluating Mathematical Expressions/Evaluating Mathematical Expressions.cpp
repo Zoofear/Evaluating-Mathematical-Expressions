@@ -8,20 +8,31 @@
 
 int main()
 {
-	std::string x = "( 4.3 + -.3 ) * 3 / 2";
-	Infix2Postfix test(x);
-	test.infixConverter();
-	std::string y = test.returnOutput();
-	std::cout << y << "\n";
+	std::ifstream file;
+	file.open("RpnData.txt");
 
-	PostfixEval test1(y);
+	if (!file.fail())
+	{
+		int j = 1;
+		while (!file.eof())
+		{
+			std::cout << j << "\n";
+			j++;
 
-	test1.eval();
+			std::string expression;
+			getline(file, expression);
 
-	double z = test1.returnOutput();
+			PostfixEval testeval(expression);
+			testeval.eval();
 
-	std::cout << z << "\n";
-	
+			double output = testeval.returnOutput();
+			std::cout << "Postfix: " << expression << "\nEvaluated : " << output << "\n";
+		}
+	}
+	else if (file.fail())
+	{
+		std::cout << "file error \n";
+	}
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
