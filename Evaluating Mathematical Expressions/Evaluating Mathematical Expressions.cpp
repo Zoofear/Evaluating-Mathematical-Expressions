@@ -2,11 +2,26 @@
 //
 
 #include <iostream>
+#include <fstream>
 #include "Infix2Postfix.h"
+#include "PostfixEval.h"
 
 int main()
 {
- 
+	std::string x = "3 + 4 / 5";
+	Infix2Postfix test(x);
+	test.infixConverter();
+	std::string y = test.returnOutput();
+	std::cout << y << "\n";
+
+	PostfixEval test1(y);
+
+	test1.eval();
+
+	double z = test1.returnOutput();
+
+	std::cout << z << "\n";
+	
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

@@ -4,30 +4,61 @@
 #include <sstream>
 #include <stack>
 #include <string>
+#include <cmath>
 
 class PostfixEval
 {
 public:
 
-	PostfixEval(std::string input);
+	PostfixEval(std::string x)
+	{
+		setInput(x);
+	}
 
-	double exponent(double x, char z, double y);
+	double exponent(double x,  double y)
+	{
+		return pow(x, y);
+	}
 
-	double multiplication(double x, char z, double y);
+	double multiplication(double x, double y)
+	{
+		return (x * y);
+	}
 
-	double division(double x, char z, double y);
+	double division(double x, double y)
+	{
+		if (y == 0)
+		{
+			std::cout << "You're attempting to divide by 0\n";
+			return 0;
+		}
 
-	double addition(double x, char z, double y);
+		return (x / y);
+	}
 
-	double subtraction(double x, char z, double y);
+	double addition(double x, double y)
+	{
+		return (x + y);
+	}
+
+	double subtraction(double x, double y)
+	{
+		return (x - y);
+	}
 
 	int operatorChooser(char z);
 
-	double eval();
+	void eval();
 
-	void setInput();
+	void setInput(std::string x)
+	{
+		input = x;
+	}
 
-	void returnOutput();
+	double returnOutput()
+	{
+		return output;
+	}
 
 
 
@@ -35,6 +66,6 @@ public:
 private:
 	std::string input;
 	double output;
-	std::stack<double> operand;
-	std::stack<char> operators;
+	std::string token;
+	std::stack<double> operands;
 };

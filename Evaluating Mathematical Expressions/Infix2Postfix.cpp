@@ -257,8 +257,9 @@ void Infix2Postfix::infixConverter()
 				{
 					while (temporarystack.top() != "(" && (!temporarystack.empty()))	//Parses through the stack until it is either empty (to prevent a memory address issue) or it finds it other half (
 					{
-						temp = temporarystack.top();			//Printing from the stack since everything on here is the contents of the enclosure the other parenthesis created
+						temp = temporarystack.top();									//Printing from the stack since everything on here is the contents of the enclosure the other parenthesis created
 						output += temp;
+						output += " ";
 						temporarystack.pop();
 					}
 					if (temporarystack.top() == "(")
@@ -286,6 +287,7 @@ void Infix2Postfix::infixConverter()
 						{
 							temp = temporarystack.top();
 							output += temp;
+							output += " ";
 							temporarystack.pop();
 						}
 						temporarystack.push(token);																	//Places the token  on the stack so it can be evaluated next
@@ -294,12 +296,14 @@ void Infix2Postfix::infixConverter()
 			}
 			else if (isoperator == 0)
 			{
-				output += token;		//if it is an operand it can be directly added to the output
+				output += token;																					//if it is an operand it can be directly added to the output
+				output += " ";
 			}
 		}
 		while (!temporarystack.empty())	//printing the rest of the leftovers in the stack
 		{
 			output += temporarystack.top();
+			output += " ";
 			temporarystack.pop();
 		}
 	}
