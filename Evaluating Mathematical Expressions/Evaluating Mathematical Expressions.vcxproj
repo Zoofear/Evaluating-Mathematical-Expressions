@@ -129,9 +129,11 @@
   <ItemGroup>
     <ClCompile Include="Evaluating Mathematical Expressions.cpp" />
     <ClCompile Include="Infix2Postfix.cpp" />
+    <ClCompile Include="PostfixEval.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Infix2Postfix.h" />
+    <ClInclude Include="PostfixEval.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
