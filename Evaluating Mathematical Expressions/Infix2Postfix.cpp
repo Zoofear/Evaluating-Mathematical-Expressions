@@ -37,7 +37,7 @@ int Infix2Postfix::operatorChecker(std::string token)
 	{
 		return 1;
 	}
-	else if (std::isdigit(token[0]) || ((token[0] == '.' && token.length() > 1)) || ((token[0] >= 'a' && token[0] <= 'z') || (token[0] >= 'A' && token[0] <= 'Z')))
+	else if (std::isdigit(token[0]) || (((token[0] == '-' || token[0] == '.') && token.length() > 1)) || ((token[0] >= 'a' && token[0] <= 'z') || (token[0] >= 'A' && token[0] <= 'Z')))
 	{
 		return 0;
 	}
@@ -297,6 +297,7 @@ void Infix2Postfix::infixConverter()
 			else if (isoperator == 0)
 			{
 				output += token;		//if it is an operand it can be directly added to the output
+				output += " ";
 			}
 		}
 		while (!temporarystack.empty())	//printing the rest of the leftovers in the stack

@@ -8,7 +8,7 @@
 
 int main()
 {
-    std::string x = " ( A + B * C ) / ( D - E ) ";
+    std::string x = " ( A + -B * C ) / ( D - E ) ";
 
     Infix2Postfix expression(x);
 
