@@ -29,7 +29,7 @@ public:
 	{
 		if (y == 0)
 		{
-			std::cout << "You're attempting to divide by 0\n";
+			std::cout << "You're attempting to divide by 0\n";	//prevents division by 0
 			return 0;
 		}
 
@@ -46,9 +46,9 @@ public:
 		return (x - y);
 	}
 
-	int operatorChooser(char z);
+	int operatorChooser(char z);		//just gives an int for whatever operator is used
 
-	void eval();
+	void eval();						//reads the postfix string and evaluates it then sets output as the results
 
 	void setInput(std::string x)
 	{

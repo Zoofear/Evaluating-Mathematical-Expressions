@@ -2,7 +2,7 @@
 
 #include "PostfixEval.h"
 
-int PostfixEval::operatorChooser(char z)
+int PostfixEval::operatorChooser(char z)	//just gives an int for whatever operator is used
 {
 
 	char c = z;
@@ -35,44 +35,65 @@ int PostfixEval::operatorChooser(char z)
 
 void PostfixEval::eval()
 {
+	std::istringstream ss(input);
 
+	while (ss >> token)
 	{
-			std::cout << token << "\n";
-			if (std::isdigit(token[0]) || (token[0] == '.' && token.length() > 1))
+			if (std::isdigit(token[0]) || ((token[0] == '-' || token[0] == '.') && token.length() > 1))				//checks if the token is a number
 			{
 				double number = std::stod(token);
 				operands.push(number);
 			}
-			else if (operatorChooser(token[0]) > 0 && operatorChooser(token[0]) < 6)
+			else if (operatorChooser(token[0]) > 0 && operatorChooser(token[0]) < 6)		//checks if the token is an operator
 			{
-				double val1 = operands.top();
-				operands.pop();
-				double val2 = operands.top();
-				operands.pop();
+				double val1;														//temporary values to pop from stack to use when the token is an operand
+				double val2;														//temporary values to pop from stack to use when the token is an operand
+				
+				if (!operands.empty())												//preventing the calling and popping of an empty stack
+				{
+					val2 = operands.top();
+					operands.pop();
+				}
+				else
+				{
+					std::cout << "Trying to access an empty stack! Please check input\n";		//error message
+					return;
+				}
+				if (!operands.empty())												//preventing the calling and popping of an empty stack
+				{
+					val1 = operands.top();
+					operands.pop();
+				}
+				else
+				{
+					std::cout << "Trying to access an empty stack! Please check input\n";		//error message
+					return;
+				}
 	
-				if (operatorChooser(token[0] == 5))
+				if (operatorChooser(token[0]) == 5)
 				{
 					operands.push(exponent(val1, val2));
 				}
-				else if (operatorChooser(token[0] == 4))
+				else if (operatorChooser(token[0]) == 4)
 				{
 					operands.push(multiplication(val1, val2));
 				}
-				else if (operatorChooser(token[0] == 3))
+				else if (operatorChooser(token[0]) == 3)
 				{
 					operands.push(division(val1, val2));
 				}
-				else if (operatorChooser(token[0] == 2))
+				else if (operatorChooser(token[0]) == 2)
 				{
 					operands.push(addition(val1, val2));
 				}
-				else if (operatorChooser(token[0] == 1))
+				else if (operatorChooser(token[0]) == 1)
 				{
 					operands.push(subtraction(val1, val2));
 				}
 				else
 				{
-					std::cout << "something went wrong with the operator chooser function \n";
+					std::cout << "something went wrong with the operator chooser function \n";	//error message, even though this should never occur since there is a check
+					return;
 				}
 			}
 			else
@@ -83,4 +104,24 @@ void PostfixEval::eval()
 	}
 
 	output = operands.top();
+	if (operands.size() != 1)
+	{
+		std::cout << "There is an error with the output, as there are still operands in the stack\nStack: ";
+		while (!operands.empty())
+		{
+			std::cout << operands.top() << " ";
+			operands.pop();
+		}
+		output = 0;
+		std::cout << "\n";
+		return;
+	}
+	else
+	{
+		while (!operands.empty())
+		{
+			operands.pop();
+		}
+	}
+	
 }

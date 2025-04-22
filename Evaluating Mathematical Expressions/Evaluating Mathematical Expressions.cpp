@@ -8,7 +8,7 @@
 
 int main()
 {
-	std::string x = "3 + 4 / 5";
+	std::string x = "( 4.3 + -.3 ) * 3 / 2";
 	Infix2Postfix test(x);
 	test.infixConverter();
 	std::string y = test.returnOutput();
