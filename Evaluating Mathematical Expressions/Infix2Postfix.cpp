@@ -60,11 +60,16 @@ int Infix2Postfix::inputVerifyer(const std::string start)			//Evil Spaghetti Cod
 
 		return 0;
 	}
+	else if (tokenVerifyer() == 0)
+	{
+		return 0;
+	}
 	
 	std::istringstream ss(start);
 	int j = 0;														//cursor for where to look within the stack
 	int parenthesis1 = 0;											//counter for the amount of ( in the input
 	int parenthesis2 = 0;											//counter for the amount of ) in the input*
+
 	while (ss >> token)
 	{	
 		std::istringstream tss(start);								//Temporary istringstream function so that it can function separately within each iteration of ss
@@ -75,18 +80,10 @@ int Infix2Postfix::inputVerifyer(const std::string start)			//Evil Spaghetti Cod
 		}
 		std::string prev = " ";										//Variable to use to check what is the next token in the stack
 		std::string next = " ";										//Variable to use to check what is the previous token in the stack
-		if (operatorChecker(token) == -1)							//Checks to see if there is an invalid operator or operand and doesnt allow it to be used
-		{
-			stackClearer();											//Cleans the stack for the next run
-
-			std::cout << "Error with this token: " << token << "\n";//error message
-			return 0;												//error output
-
-		}
-		else if (operatorChecker(token) == 0)
+		if (operatorChecker(token) == 0)
 		{
 
-			if (j == 1)																	////This checks to see if the token being evaluated is at the start of the string, if it is then it needs a filler to make sure there isnt a false positive, since blank space gives no value on operatorChecker();
+			if (j == 0)																	////This checks to see if the token being evaluated is at the start of the string, if it is then it needs a filler to make sure there isnt a false positive, since blank space gives no value on operatorChecker();
 			{
 				prev = "-";
 			}
@@ -97,14 +94,16 @@ int Infix2Postfix::inputVerifyer(const std::string start)			//Evil Spaghetti Cod
 					prev = temporarystack.top();
 					temporarystack.pop();
 				}
-				stackClearer();															//Cleans up stack to not cause issues
+				
+				stackClearer();														//Cleans up stack to not cause issues
+				
+				std::istringstream tss(start);											//Fresh stack to evaluate
+				while (tss >> temp)
+				{
+					temporarystack.push(temp);
+				}
 			}	
 
-			std::istringstream tss(start);											//Fresh stack to evaluate
-			while (tss >> temp)
-			{
-				temporarystack.push(temp);
-			}
 			if (j + 1 == temporarystack.size())										//This checks to see if the token being evaluated is at the end of the string, if it is then it needs a filler to make sure there isnt a false positive, since blank space gives no value on operatorChecker();
 			{
 				next = "-";
@@ -123,7 +122,7 @@ int Infix2Postfix::inputVerifyer(const std::string start)			//Evil Spaghetti Cod
 
 			if ((operatorChecker(prev) != 1 || operatorChecker(next) != 1))//Evaluates the tokens to see if it needs to throw an error code
 			{
-				std::cout << next << "Operand Error\n";
+				std::cout << "Operand Error\n";
 				return 0;
 			}
 
@@ -162,7 +161,7 @@ int Infix2Postfix::inputVerifyer(const std::string start)			//Evil Spaghetti Cod
 
 			if ((operatorChecker(prev) != 0 || operatorChecker(next) != 0) && (next != "(" && prev != ")"))	//Evaluates the tokens to see if it needs to throw an error code
 			{
-				std::cout << next << " Operator Error\n";
+				std::cout << "Operator Error\n";
 				return 0;
 			}
 		}

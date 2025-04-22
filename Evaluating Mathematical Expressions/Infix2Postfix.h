@@ -45,6 +45,24 @@ public:
 
 		return k;
 	}
+
+	int tokenVerifyer()
+	{
+		std::istringstream ss(start);
+		while (ss >> token)
+		{
+			if (operatorChecker(token) == -1)							//Checks to see if there is an invalid operator or operand and doesnt allow it to be used
+			{
+				stackClearer();											//Cleans the stack for the next run
+
+				std::cout << "Error with this token: " << token << "\n";//error message
+				return 0;												//error output
+			}
+		}
+		
+		return 1;
+	}
+
 	void setInput(const std::string input)
 	{
 		start = input;
