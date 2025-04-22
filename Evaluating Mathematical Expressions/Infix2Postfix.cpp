@@ -259,6 +259,7 @@ void Infix2Postfix::infixConverter()
 					{
 						temp = temporarystack.top();			//Printing from the stack since everything on here is the contents of the enclosure the other parenthesis created
 						output += temp;
+						output += " ";
 						temporarystack.pop();
 					}
 					if (temporarystack.top() == "(")
@@ -286,6 +287,7 @@ void Infix2Postfix::infixConverter()
 						{
 							temp = temporarystack.top();
 							output += temp;
+							output += " ";
 							temporarystack.pop();
 						}
 						temporarystack.push(token);																	//Places the token  on the stack so it can be evaluated next
@@ -300,6 +302,7 @@ void Infix2Postfix::infixConverter()
 		while (!temporarystack.empty())	//printing the rest of the leftovers in the stack
 		{
 			output += temporarystack.top();
+			output += " ";
 			temporarystack.pop();
 		}
 	}
